@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.task;
+package io.github.cliffhangermc.cliff.task;
 
-import cn.enaium.humblemc.gradle.util.GameUtil;
+import io.github.cliffhangermc.cliff.util.GameUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.gradle.api.Project;
@@ -50,12 +50,12 @@ public class GenerateIdeaRunTask extends Task {
         programArgs.append("--gameDir").append(" ").append(runDir.getAbsolutePath()).append(" ");
         programArgs.append("--assetsDir").append(" ").append(GameUtil.getClientAssetDir(extension)).append(" ");
         programArgs.append("--assetIndex").append(" ").append(extension.minecraft.version).append(" ");
-        programArgs.append("--version").append(" ").append("humble").append(" ");
+        programArgs.append("--version").append(" ").append("cliff").append(" ");
         programArgs.append("--accessToken").append(" ").append("0").append(" ");
 
         try {
             String idea = IOUtils.toString(Objects.requireNonNull(GenerateIdeaRunTask.class.getResourceAsStream("/IDEA_RUN_CONFIGURATION.xml")), StandardCharsets.UTF_8);
-            idea = idea.replace("%NAME%", "Humble Client Run");
+            idea = idea.replace("%NAME%", "Cliff Client Run");
             idea = idea.replace("%MAIN_CLASS%", extension.minecraft.mainClass);
             idea = idea.replace("%IDEA_MODULE%", getModule());
             idea = idea.replace("%PROGRAM_ARGS%", programArgs.toString().replaceAll("\"", "&quot;"));
@@ -65,7 +65,7 @@ public class GenerateIdeaRunTask extends Task {
             String projectPath = getProject() == getProject().getRootProject() ? "" : getProject().getPath().replace(':', '_');
             File projectDir = getProject().getRootProject().file(".idea");
             File runConfigsDir = new File(projectDir, "runConfigurations");
-            File runConfigs = new File(runConfigsDir, "Humble_Client_Run" + projectPath + ".xml");
+            File runConfigs = new File(runConfigsDir, "Cliff_Client_Run" + projectPath + ".xml");
             if (!runConfigsDir.exists()) {
                 runConfigsDir.mkdirs();
             }

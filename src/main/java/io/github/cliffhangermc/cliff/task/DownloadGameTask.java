@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.task;
+package io.github.cliffhangermc.cliff.task;
 
-import cn.enaium.humblemc.gradle.util.GameUtil;
+import io.github.cliffhangermc.cliff.util.GameUtil;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.tasks.TaskAction;
 

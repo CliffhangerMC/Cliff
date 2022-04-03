@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.task;
+package io.github.cliffhangermc.cliff.task;
 
-import cn.enaium.humblemc.gradle.util.DownloadUtil;
-import cn.enaium.humblemc.gradle.util.GameUtil;
+import io.github.cliffhangermc.cliff.util.DownloadUtil;
+import io.github.cliffhangermc.cliff.util.GameUtil;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

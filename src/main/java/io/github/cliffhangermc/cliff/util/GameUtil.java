@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.util;
+package io.github.cliffhangermc.cliff.util;
 
-import cn.enaium.humblemc.gradle.HumbleGradleExtension;
+import io.github.cliffhangermc.cliff.CliffGradleExtension;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -27,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-import static cn.enaium.humblemc.gradle.util.DownloadUtil.readFile;
-import static cn.enaium.humblemc.gradle.util.DownloadUtil.readString;
+import static io.github.cliffhangermc.cliff.util.DownloadUtil.readFile;
+import static io.github.cliffhangermc.cliff.util.DownloadUtil.readString;
 
 /**
  * @author Enaium
@@ -50,7 +50,7 @@ public class GameUtil {
         return System.getProperty("os.name").toLowerCase(Locale.ROOT);
     }
 
-    public static String getJson(HumbleGradleExtension extension) {
+    public static String getJson(CliffGradleExtension extension) {
         String jsonUrl = "";
         for (JsonElement jsonElement : new Gson().fromJson(readString(extension.minecraft.manifest), JsonObject.class).get("versions").getAsJsonArray()) {
             if (jsonElement.getAsJsonObject().get("id").getAsString().equals(extension.minecraft.version)) {
@@ -61,7 +61,7 @@ public class GameUtil {
     }
 
 
-    public static List<String> getLibraries(HumbleGradleExtension extension) {
+    public static List<String> getLibraries(CliffGradleExtension extension) {
         LinkedHashMap<String, String> list = new LinkedHashMap<>();
         for (JsonElement jsonElement : new Gson().fromJson(getJson(extension), JsonObject.class).get("libraries").getAsJsonArray()) {
             if (jsonElement.getAsJsonObject().has("natives")) {
@@ -77,7 +77,7 @@ public class GameUtil {
         return libraries;
     }
 
-    public static List<String> getNatives(HumbleGradleExtension extension) {
+    public static List<String> getNatives(CliffGradleExtension extension) {
         List<String> libraries = new ArrayList<>();
 
         for (JsonElement jsonElement : new Gson().fromJson(getJson(extension), JsonObject.class).get("libraries").getAsJsonArray()) {
@@ -102,7 +102,7 @@ public class GameUtil {
         return new File(getMinecraftDir(), "versions" + File.separator + version + File.separator + version + ".jar");
     }
 
-    public static File getClientNativeDir(HumbleGradleExtension extension) {
+    public static File getClientNativeDir(CliffGradleExtension extension) {
         File file = new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-native");
         if (!file.exists()) {
             file.mkdir();
@@ -110,7 +110,7 @@ public class GameUtil {
         return file;
     }
 
-    public static File getNativeJarDir(HumbleGradleExtension extension) {
+    public static File getNativeJarDir(CliffGradleExtension extension) {
         File nativeJarDir = new File(GameUtil.getClientNativeDir(extension), "jars");
         if (!nativeJarDir.exists()) {
             nativeJarDir.mkdir();
@@ -118,7 +118,7 @@ public class GameUtil {
         return nativeJarDir;
     }
 
-    public static File getNativeFileDir(HumbleGradleExtension extension) {
+    public static File getNativeFileDir(CliffGradleExtension extension) {
         File nativeFileDir = new File(GameUtil.getClientNativeDir(extension), "natives");
         if (!nativeFileDir.exists()) {
             nativeFileDir.mkdir();
@@ -126,31 +126,31 @@ public class GameUtil {
         return nativeFileDir;
     }
 
-    public static File getClientFile(HumbleGradleExtension extension) {
+    public static File getClientFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-client.jar");
     }
 
-    public static File getServerFile(HumbleGradleExtension extension) {
+    public static File getServerFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-server.jar");
     }
 
-    public static File getClientCleanFile(HumbleGradleExtension extension) {
+    public static File getClientCleanFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-client-clean.jar");
     }
 
-    public static File getServerCleanFile(HumbleGradleExtension extension) {
+    public static File getServerCleanFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-server-clean.jar");
     }
 
-    public static File getClientCleanSourceFile(HumbleGradleExtension extension) {
+    public static File getClientCleanSourceFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-client-clean-source.jar");
     }
 
-    public static File getClientServerSourceFile(HumbleGradleExtension extension) {
+    public static File getClientServerSourceFile(CliffGradleExtension extension) {
         return new File(getGameDir(extension), extension.minecraft.version + File.separator + extension.minecraft.version + "-client-server-source.jar");
     }
 
-    public static File getMappingDir(HumbleGradleExtension extension) {
+    public static File getMappingDir(CliffGradleExtension extension) {
         File mapping = new File(extension.getUserCache(), "mapping");
         if (!mapping.exists()) {
             mapping.mkdir();
@@ -158,7 +158,7 @@ public class GameUtil {
         return mapping;
     }
 
-    public static File getClientMappingFile(HumbleGradleExtension extension) {
+    public static File getClientMappingFile(CliffGradleExtension extension) {
         File file = new File(getMappingDir(extension), extension.minecraft.version + "-client.txt");
         if (!file.exists()) {
             try {
@@ -170,7 +170,7 @@ public class GameUtil {
         return file;
     }
 
-    public static File getServerMappingFile(HumbleGradleExtension extension) {
+    public static File getServerMappingFile(CliffGradleExtension extension) {
         File file = new File(getMappingDir(extension), extension.minecraft.version + "-server.txt");
         if (!file.exists()) {
             try {
@@ -182,7 +182,7 @@ public class GameUtil {
         return file;
     }
 
-    public static File getGameDir(HumbleGradleExtension extension) {
+    public static File getGameDir(CliffGradleExtension extension) {
         File game = new File(extension.getUserCache(), "game");
         if (!game.exists()) {
             game.mkdir();
@@ -190,43 +190,43 @@ public class GameUtil {
         return game;
     }
 
-    public static JsonObject getDownloadsJson(HumbleGradleExtension extension) {
+    public static JsonObject getDownloadsJson(CliffGradleExtension extension) {
         return new Gson().fromJson(getJson(extension), JsonObject.class).get("downloads").getAsJsonObject();
     }
 
-    public static String getClientJarSha1(HumbleGradleExtension extension) {
+    public static String getClientJarSha1(CliffGradleExtension extension) {
         return getDownloadsJson(extension).getAsJsonObject().get("client").getAsJsonObject().get("sha1").getAsString();
     }
 
-    public static String getServerJarSha1(HumbleGradleExtension extension) {
+    public static String getServerJarSha1(CliffGradleExtension extension) {
         return getDownloadsJson(extension).getAsJsonObject().get("server").getAsJsonObject().get("sha1").getAsString();
     }
 
-    public static byte[] getClientJar(HumbleGradleExtension extension) {
+    public static byte[] getClientJar(CliffGradleExtension extension) {
         return readFile(getDownloadsJson(extension).getAsJsonObject().get("client").getAsJsonObject().get("url").getAsString());
     }
 
-    public static byte[] getServerJar(HumbleGradleExtension extension) {
+    public static byte[] getServerJar(CliffGradleExtension extension) {
         return readFile(getDownloadsJson(extension).getAsJsonObject().get("server").getAsJsonObject().get("url").getAsString());
     }
 
-    public static String getClientMapping(HumbleGradleExtension extension) {
+    public static String getClientMapping(CliffGradleExtension extension) {
         return readString(getDownloadsJson(extension).getAsJsonObject().get("client_mappings").getAsJsonObject().get("url").getAsString());
     }
 
-    public static String getServerMapping(HumbleGradleExtension extension) {
+    public static String getServerMapping(CliffGradleExtension extension) {
         return readString(getDownloadsJson(extension).getAsJsonObject().get("server_mappings").getAsJsonObject().get("url").getAsString());
     }
 
-    public static String getClientMappingSha1(HumbleGradleExtension extension) {
+    public static String getClientMappingSha1(CliffGradleExtension extension) {
         return getDownloadsJson(extension).getAsJsonObject().get("client_mappings").getAsJsonObject().get("sha1").getAsString();
     }
 
-    public static String getServerMappingSha1(HumbleGradleExtension extension) {
+    public static String getServerMappingSha1(CliffGradleExtension extension) {
         return getDownloadsJson(extension).getAsJsonObject().get("server_mappings").getAsJsonObject().get("sha1").getAsString();
     }
 
-    public static File getClientAssetDir(HumbleGradleExtension extension) {
+    public static File getClientAssetDir(CliffGradleExtension extension) {
         File assets = new File(extension.getUserCache(), "assets");
         if (!assets.exists()) {
             assets.mkdir();
@@ -234,7 +234,7 @@ public class GameUtil {
         return assets;
     }
 
-    public static File getClientIndexDir(HumbleGradleExtension extension) {
+    public static File getClientIndexDir(CliffGradleExtension extension) {
         File index = new File(getClientAssetDir(extension), "indexes");
         if (!index.exists()) {
             index.mkdir();
@@ -242,7 +242,7 @@ public class GameUtil {
         return index;
     }
 
-    public static File getClientIndexFile(HumbleGradleExtension extension) {
+    public static File getClientIndexFile(CliffGradleExtension extension) {
         File file = new File(GameUtil.getClientIndexDir(extension), extension.minecraft.version + ".json");
         if (!file.exists()) {
             try {
@@ -254,7 +254,7 @@ public class GameUtil {
         return file;
     }
 
-    public static File getClientObjectFile(HumbleGradleExtension extension, String name) {
+    public static File getClientObjectFile(CliffGradleExtension extension, String name) {
         File file = new File(GameUtil.getClientObjectDir(extension), name.substring(0, 2));
         if (!file.exists()) {
             file.mkdir();
@@ -271,7 +271,7 @@ public class GameUtil {
     }
 
 
-    public static File getClientObjectDir(HumbleGradleExtension extension) {
+    public static File getClientObjectDir(CliffGradleExtension extension) {
         File index = new File(getClientAssetDir(extension), "objects");
         if (!index.exists()) {
             index.mkdir();
@@ -283,7 +283,7 @@ public class GameUtil {
         return new File(getMinecraftDir(), "assets" + File.separator + "objects");
     }
 
-    public static File getClientSkinDir(HumbleGradleExtension extension) {
+    public static File getClientSkinDir(CliffGradleExtension extension) {
         File index = new File(getClientAssetDir(extension), "skins");
         if (!index.exists()) {
             index.mkdir();
@@ -291,11 +291,11 @@ public class GameUtil {
         return index;
     }
 
-    public static String getClientAsset(HumbleGradleExtension extension) {
+    public static String getClientAsset(CliffGradleExtension extension) {
         return readString(new Gson().fromJson(getJson(extension), JsonObject.class).get("assetIndex").getAsJsonObject().get("url").getAsString());
     }
 
-    public static String getClientAssetSha1(HumbleGradleExtension extension) {
+    public static String getClientAssetSha1(CliffGradleExtension extension) {
         return new Gson().fromJson(getJson(extension), JsonObject.class).get("assetIndex").getAsJsonObject().get("sha1").getAsString();
     }
 

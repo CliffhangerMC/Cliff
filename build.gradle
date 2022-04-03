@@ -3,14 +3,18 @@ plugins {
     id 'maven-publish'
 }
 
-group 'cn.enaium.humblemc'
-version '1.0.0'
+group 'io.github.cliffhangermc'
+version '1.0.0-' + releaseTime()
 
 repositories {
     mavenCentral()
 }
 
 def asmVersion = '9.2'
+
+def releaseTime() {
+    return new Date().format("yyyyMMdd-HHmm", TimeZone.getTimeZone("GMT+08:00"))
+}
 
 dependencies {
     implementation gradleApi()

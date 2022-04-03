@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.util;
+package io.github.cliffhangermc.cliff.util;
 
 import org.apache.commons.io.FileUtils;
 

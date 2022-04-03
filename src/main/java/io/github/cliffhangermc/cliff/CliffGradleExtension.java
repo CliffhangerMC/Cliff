@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle;
+package io.github.cliffhangermc.cliff;
 
 import groovy.lang.Closure;
 import groovy.lang.GroovyObjectSupport;
-import org.gradle.api.NamedDomainObjectContainer;
 import org.gradle.api.Project;
 
 import java.io.File;
@@ -28,7 +27,7 @@ import java.util.Set;
 /**
  * @author Enaium
  */
-public class HumbleGradleExtension {
+public class CliffGradleExtension {
     /**
      * Minecraft configuration
      */
@@ -41,12 +40,12 @@ public class HumbleGradleExtension {
 
     private final Project project;
 
-    public HumbleGradleExtension(Project project) {
+    public CliffGradleExtension(Project project) {
         this.project = project;
     }
 
     public File getUserCache() {
-        File userCache = new File(project.getGradle().getGradleUserHomeDir(), "caches" + File.separator + "humblemc");
+        File userCache = new File(project.getGradle().getGradleUserHomeDir(), "caches" + File.separator + "cliffhangermc");
 
         if (!userCache.exists()) {
             userCache.mkdirs();

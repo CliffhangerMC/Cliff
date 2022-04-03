@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle.task;
+package io.github.cliffhangermc.cliff.task;
 
-import cn.enaium.humblemc.gradle.HumbleGradleExtension;
+import io.github.cliffhangermc.cliff.CliffGradleExtension;
 import org.gradle.api.DefaultTask;
 
 /**
  * @author Enaium
  */
 public class Task extends DefaultTask {
-    public final HumbleGradleExtension extension;
+    public final CliffGradleExtension extension;
 
     public Task() {
-        //get extension
-        extension = getProject().getExtensions().getByType(HumbleGradleExtension.class);
-        setGroup("humble");
+        extension = getProject().getExtensions().getByType(CliffGradleExtension.class);
+        setGroup("cliff");
     }
 }

@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package cn.enaium.humblemc.gradle;
+package io.github.cliffhangermc.cliff;
 
-import cn.enaium.humblemc.gradle.task.*;
-import cn.enaium.humblemc.gradle.util.GameUtil;
+import io.github.cliffhangermc.cliff.task.*;
+import io.github.cliffhangermc.cliff.util.GameUtil;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 
 /**
  * @author Enaium
  */
-public class HumbleGradlePlugin implements Plugin<Project> {
+public class CliffGradlePlugin implements Plugin<Project> {
     @Override
     public void apply(Project project1) {
 
         //Create extension
-        HumbleGradleExtension extension = project1.getExtensions().create("humble", HumbleGradleExtension.class, project1);
+        CliffGradleExtension extension = project1.getExtensions().create("cliff", CliffGradleExtension.class, project1);
 
         project1.afterEvaluate(project -> {
 
@@ -47,6 +47,12 @@ public class HumbleGradlePlugin implements Plugin<Project> {
             project.getRepositories().maven(mavenArtifactRepository -> {
                 mavenArtifactRepository.setName("enaium");
                 mavenArtifactRepository.setUrl("https://maven.enaium.cn/");
+            });
+
+            //CliffhangerMC maven repository
+            project.getRepositories().maven(mavenArtifactRepository -> {
+                mavenArtifactRepository.setName("cliffhangermc");
+                mavenArtifactRepository.setUrl("https://raw.githubusercontent.com/CliffhangerMC/mvn-repo/main/");
             });
 
             //SpongePowered maven repository
